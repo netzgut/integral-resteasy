@@ -1,0 +1,106 @@
+group 'net.netzgut.integral'
+version '0.0.1-SNAPSHOT'
+
+
+apply plugin: 'java'
+apply plugin: 'maven'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+        jcenter()
+    }
+}
+
+project.ext.versions = [
+    log4j: '1.2.17',
+    slf4j: '1.7.21',
+    tapestry: '5.4.1',
+    resteasy: '3.0.19.Final',
+    servlet: '2.5'
+]
+
+project.ext.moduleClasses = 'net.netzgut.integral.resteasy.modules.ResteasyModule'
+
+dependencies {
+
+    compile "log4j:log4j:${versions.log4j}"
+    compile "org.slf4j:slf4j-log4j12:${versions.slf4j}"
+
+    compile "org.apache.tapestry:tapestry-core:${versions.tapestry}"
+
+    compile("org.jboss.resteasy:resteasy-jaxrs:${versions.resteasy}") {
+        exclude group: 'org.slf4j', module: 'slf4j-simple'
+    }
+    compile "org.jboss.resteasy:resteasy-jaxb-provider:${versions.resteasy}"
+
+    runtime "javax.servlet:servlet-api:${versions.servlet}"
+}
+
+jar {
+    manifest { attributes 'Tapestry-Module-Classes': moduleClasses }
+}
+
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '3.1'
+}
+
+
+task pom << {
+    pom {
+        packaging = 'jar'
+        project {
+            inceptionYear '2016'
+            name rootProject.name
+            description 'A ReastEasy 3.0.19 replacement for org.tynamo.tapestry-resteasy'
+            url 'https://github.com/netzgut/integral-resteasy'
+            properties {
+                'project.build.sourceEncoding' 'UTF-8'
+            }
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                url 'https://github.com/netzgut/integral-resteasy'
+                connection 'scm:git:git://github.com/netzgut/integral-resteasy.git'
+                developerConnection 'scm:git:git@github.com:netzgut/integral-resteasy.git'
+            }
+        }
+    }.withXml { xmlProvider ->
+        def plugins = xmlProvider.asNode().appendNode('build').appendNode('plugins')
+        def mavenCompilerPlugin = plugins.appendNode('plugin')
+        mavenCompilerPlugin.appendNode('artifactId').value = 'maven-compiler-plugin'
+        mavenCompilerPlugin.appendNode('version').value = '3.1'
+        def mavenCompilerPluginConfiguration = mavenCompilerPlugin.appendNode('configuration')
+        mavenCompilerPluginConfiguration.appendNode('source').value = sourceCompatibility
+        mavenCompilerPluginConfiguration.appendNode('target').value = targetCompatibility
+
+        def mavenSurefirePlugin = plugins.appendNode('plugin')
+        mavenSurefirePlugin.appendNode('artifactId').value = 'maven-surfire-plugin'
+        mavenSurefirePlugin.appendNode('version').value = '2.19.1'
+        mavenSurefirePlugin.appendNode('configuration')
+
+        def jettyMavenPlugin = plugins.appendNode('plugin')
+        jettyMavenPlugin.appendNode('artifactId').value = 'jetty-maven-plugin'
+        jettyMavenPlugin.appendNode('version').value = versions.jetty
+        def jettyMavenPluginConfiguration = jettyMavenPlugin.appendNode('configuration')
+        def jettyMavenPluginSystemProperty = jettyMavenPluginConfiguration.appendNode('systemProperties').appendNode('systemProperty')
+        jettyMavenPluginSystemProperty.appendNode('name').value = 'tapestry.execution-mode'
+        jettyMavenPluginSystemProperty.appendNode('value').value = 'development'
+
+        def mavenJarPlugin = plugins.appendNode('plugin')
+        mavenJarPlugin.appendNode('artifactId').value = 'maven-jar-plugin'
+        def mavenJarPluginConfigurationManifest = mavenJarPlugin.appendNode('configuration').appendNode('archive').appendNode('manifestEntries')
+        mavenJarPluginConfigurationManifest.appendNode('Tapestry-Module-Classes').value = moduleClasses
+
+    }.writeTo("pom.xml")
+}

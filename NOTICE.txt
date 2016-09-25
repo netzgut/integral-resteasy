@@ -1,0 +1,4 @@
+This product is based on
+Tynamo Tapestry RestEasy (https://github.com/tynamo/tapestry-resteasy)
+by
+Tynamo (http://www.tynamo.org).
