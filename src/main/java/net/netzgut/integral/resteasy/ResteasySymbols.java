@@ -21,9 +21,9 @@ package net.netzgut.integral.resteasy;
 public class ResteasySymbols {
 
     /**
-     * Set this if you map the Resteasy servlet to something other than /*
+     * Maps the Resteasy servlet to an url prefix.
      */
-    public static final String MAPPING_PREFIX        = "resteasy.servlet.mapping.prefix";
+    public static final String MAPPING_PREFIX        = "resteasy.servlet.mapping-prefix";
 
     /**
      * If "true", then the InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ResteasySymbols.AUTOSCAN_PACKAGE_NAME
