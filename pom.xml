@@ -5,7 +5,7 @@
   <artifactId>integral-resteasy</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>integral-resteasy</name>
-  <description>A ReastEasy 3.0.19 replacement for org.tynamo.tapestry-resteasy(-core) 5.4.x</description>
+  <description>A ReastEasy 3.0.19 replacement for org.tynamo.tapestry-resteasy</description>
   <url>https://github.com/netzgut/integral-resteasy</url>
   <inceptionYear>2016</inceptionYear>
   <licenses>
@@ -81,18 +81,6 @@
         <artifactId>maven-surfire-plugin</artifactId>
         <version>2.19.1</version>
         <configuration/>
-      </plugin>
-      <plugin>
-        <artifactId>jetty-maven-plugin</artifactId>
-        <version>null</version>
-        <configuration>
-          <systemProperties>
-            <systemProperty>
-              <name>tapestry.execution-mode</name>
-              <value>development</value>
-            </systemProperty>
-          </systemProperties>
-        </configuration>
       </plugin>
       <plugin>
         <artifactId>maven-jar-plugin</artifactId>
