@@ -10,10 +10,16 @@ targetCompatibility = '1.8'
 
 buildscript {
     repositories {
-        mavenLocal()
         mavenCentral()
         jcenter()
+        mavenLocal()
     }
+}
+
+repositories {
+    mavenCentral()
+    jcenter()
+    mavenLocal()
 }
 
 project.ext.versions = [
@@ -38,7 +44,7 @@ dependencies {
     }
     compile "org.jboss.resteasy:resteasy-jaxb-provider:${versions.resteasy}"
 
-    runtime "javax.servlet:servlet-api:${versions.servlet}"
+    compile "javax.servlet:servlet-api:${versions.servlet}"
 }
 
 jar {
@@ -91,5 +97,24 @@ task pom {
             def mavenJarPluginConfigurationManifest = mavenJarPlugin.appendNode('configuration').appendNode('archive').appendNode('manifestEntries')
             mavenJarPluginConfigurationManifest.appendNode('Tapestry-Module-Classes').value = moduleClasses
         }.writeTo('pom.xml')
+    }
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts {
+	archives sourcesJar
+}
+
+uploadArchives {
+    repositories {
+        mavenDeployer {
+            snapshotRepository(url: project.property('snapshot-repository')) {
+                authentication(userName: project.property('snapshot-repository-username'), password: project.property('snapshot-repository-password'))
+            }
+        }
     }
 }
