@@ -8,6 +8,8 @@ We love to use the latest and greatest software available. And we really love Ta
 
 ## Usage
 
+NOTE: This library isn't released yet on jcenter etc.!
+
 ### `build.gradle`:
 ```groovy
 respositories {
@@ -30,6 +32,17 @@ Now just import `ResteasyModule.class` in your app module and you're good to go.
 | AUTOSCAN              | integral.resteasy.autoscan              | true    | Scan "InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ResteasySymbols.AUTOSCAN_PACKAGE_NAME" for REST resources. |
 | AUTOSCAN_PACKAGE_NAME | integral.resteasy.autoscan-package-name | rest    | Package name for AUTOSCAN. Omit a dot-prefix.                                                                   |
 | CORS_ENABLED          | integral.resteasy.cors-enabled          | false   | Add CORS-header to responses if Origin is available in request                                                  |
+
+
+## Gradle task uploadArchives
+
+To upload the archives you need to set some project properties:
+
+- snapshot_repository
+- snapshot_repository_username
+- snapshot_repository_password
+
+The fallbacks are empty strings, so you can build etc. without gradle failing instantly.
 
 
 ## Changes from tapestry-resteasy

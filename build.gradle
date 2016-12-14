@@ -110,10 +110,15 @@ artifacts {
 }
 
 uploadArchives {
+    // We need to set the variables if not present
+    ext.snapshot_repository = project.hasProperty('snapshot-repository') ? project.property('snapshot-repository') : ''
+    ext.snapshot_repository_username = project.hasProperty('snapshot-repository-username') ? project.property('snapshot-repository-username') : ''
+    ext.snapshot_repository_password = project.hasProperty('snapshot-repository-password') ? project.property('snapshot-repository-password') : ''
+
     repositories {
         mavenDeployer {
-            snapshotRepository(url: project.property('snapshot-repository')) {
-                authentication(userName: project.property('snapshot-repository-username'), password: project.property('snapshot-repository-password'))
+            snapshotRepository(url: snapshot_repository) {
+                authentication(userName: snapshot_repository_username, password: snapshot_repository_password)
             }
         }
     }
