@@ -18,12 +18,15 @@
 
 package net.netzgut.integral.resteasy;
 
+import org.jboss.resteasy.plugins.server.servlet.ResteasyContextParameters;
+
 public class ResteasySymbols {
 
     /**
-     * Maps the Resteasy servlet to an url prefix.
+     * Maps the Resteasy servlet to an url prefix. We are re-using the constant form RestEasy
+     * to prevent typos.
      */
-    public static final String MAPPING_PREFIX        = "resteasy.servlet.mapping-prefix";
+    public static final String MAPPING_PREFIX        = ResteasyContextParameters.RESTEASY_SERVLET_MAPPING_PREFIX;
 
     /**
      * If "true", then the InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ResteasySymbols.AUTOSCAN_PACKAGE_NAME

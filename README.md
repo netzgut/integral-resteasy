@@ -26,7 +26,7 @@ Now just import `ResteasyModule.class` in your app module and you're good to go.
 
 | Symbol                | Value                                   | Default | Description                                                                                                     |
 | --------------------- | --------------------------------------- | ------- | --------------------------------------------------------------------------------------------------------------- |
-| MAPPING_PREFIX        | resteasy.servlet.mapping-prefix         | /rest   | Maps the Resteasy servlet to an url prefix                                                                      |
+| MAPPING_PREFIX        | resteasy.servlet.mapping.prefix         | /rest   | Maps the Resteasy servlet to an url prefix                                                                      |
 | AUTOSCAN              | integral.resteasy.autoscan              | true    | Scan "InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ResteasySymbols.AUTOSCAN_PACKAGE_NAME" for REST resources. |
 | AUTOSCAN_PACKAGE_NAME | integral.resteasy.autoscan-package-name | rest    | Package name for AUTOSCAN. Omit a dot-prefix.                                                                   |
 | CORS_ENABLED          | integral.resteasy.cors-enabled          | false   | Add CORS-header to responses if Origin is available in request                                                  |
