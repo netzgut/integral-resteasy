@@ -28,7 +28,7 @@ repositories {
 project.ext.versions = [
     slf4j: '1.7.21',
     tapestry: '5.4.1',
-    resteasy: '3.0.19.Final',
+    resteasy: '3.1.0.Final',
     servlet: '2.5'
 ]
 
