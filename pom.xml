@@ -39,7 +39,7 @@
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxrs</artifactId>
-      <version>3.0.19.Final</version>
+      <version>3.1.0.Final</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
@@ -51,7 +51,7 @@
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxb-provider</artifactId>
-      <version>3.0.19.Final</version>
+      <version>3.1.0.Final</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
