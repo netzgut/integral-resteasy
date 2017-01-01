@@ -52,9 +52,7 @@ jar {
     manifest { attributes 'Tapestry-Module-Classes': moduleClasses }
 }
 
-
-task wrapper(type: Wrapper) { gradleVersion = '3.2' }
-
+task wrapper(type: Wrapper) { gradleVersion = '3.2.1' }
 
 task pom {
     doLast {
