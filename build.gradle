@@ -1,23 +1,26 @@
-group 'net.netzgut.integral'
-version '0.0.1-SNAPSHOT'
-
-apply plugin: 'java'
-apply plugin: 'maven'
-apply plugin: 'nebula.provided-base'
-
-sourceCompatibility = '1.8'
-targetCompatibility = '1.8'
-
 buildscript {
     repositories {
         mavenCentral()
-        jcenter()
-        mavenLocal()
-    }
-    dependencies {
-        classpath 'com.netflix.nebula:gradle-extra-configurations-plugin:3.1.0'
     }
 }
+
+plugins {
+    id 'java'
+    id 'maven'
+    id 'nebula.provided-base' version '3.1.0'
+    id 'com.github.hierynomus.license' version '0.13.1'
+}
+
+group 'net.netzgut.integral'
+version '0.0.1-SNAPSHOT'
+description 'A ReastEasy 3.1.0 replacement for org.tynamo.tapestry-resteasy'
+
+project.ext.inceptionYear = '2016'
+project.ext.github = 'integral-resteasy'
+project.ext.moduleClasses = 'net.netzgut.integral.resteasy.modules.ResteasyModule'
+
+sourceCompatibility = '1.8'
+targetCompatibility = '1.8'
 
 repositories {
     mavenCentral()
@@ -26,26 +29,27 @@ repositories {
 }
 
 project.ext.versions = [
+    // compile
     slf4j: '1.7.21',
-    tapestry: '5.4.1',
     resteasy: '3.1.0.Final',
-    servlet: '2.5'
+
+    // provided
+    tapestry: '5.4.1',
+    servlet: '3.1.0'
 ]
 
-project.ext.moduleClasses = 'net.netzgut.integral.resteasy.modules.ResteasyModule'
 
 dependencies {
 
     compile "org.slf4j:slf4j-log4j12:${versions.slf4j}"
-
-    compile "org.apache.tapestry:tapestry-core:${versions.tapestry}"
 
     compile("org.jboss.resteasy:resteasy-jaxrs:${versions.resteasy}") {
         exclude group: 'org.slf4j', module: 'slf4j-simple'
     }
     compile "org.jboss.resteasy:resteasy-jaxb-provider:${versions.resteasy}"
 
-    provided "javax.servlet:servlet-api:${versions.servlet}"
+    provided "org.apache.tapestry:tapestry-core:${versions.tapestry}"
+    provided "javax.servlet:javax.servlet-api:${versions.servlet}"
 }
 
 jar {
@@ -59,10 +63,10 @@ task pom {
         pom {
             packaging = 'jar'
             project {
-                inceptionYear '2016'
+                inceptionYear inceptionYear
                 name rootProject.name
-                description 'A ReastEasy 3.0.19 replacement for org.tynamo.tapestry-resteasy'
-                url 'https://github.com/netzgut/integral-resteasy'
+                description project.description
+                url "https://github.com/netzgut/$github"
                 properties { 'project.build.sourceEncoding' 'UTF-8' }
                 licenses {
                     license {
@@ -72,9 +76,9 @@ task pom {
                     }
                 }
                 scm {
-                    url 'https://github.com/netzgut/integral-resteasy'
-                    connection 'scm:git:git://github.com/netzgut/integral-resteasy.git'
-                    developerConnection 'scm:git:git@github.com:netzgut/integral-resteasy.git'
+                    url "https://github.com/netzgut/$github"
+                    connection "scm:git:git://github.com/netzgut/${github}.git"
+                    developerConnection "scm:git:git@github.com:netzgut/${github}.git"
                 }
             }
         }.withXml { xmlProvider ->
@@ -121,4 +125,11 @@ uploadArchives {
             }
         }
     }
+}
+
+
+license {
+    header rootProject.file('src/main/resources/META-INF/LICENSE.txt')
+    strictCheck true
+    ext.year = Calendar.getInstance().get(Calendar.YEAR)
 }
