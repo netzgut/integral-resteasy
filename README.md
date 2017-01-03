@@ -32,6 +32,21 @@ Now just import `ResteasyModule.class` in your app module and you're good to go.
 | AUTOSCAN              | integral.resteasy.autoscan              | true    | Scan "InternalConstants.TAPESTRY_APP_PACKAGE_PARAM + ResteasySymbols.AUTOSCAN_PACKAGE_NAME" for REST resources. |
 | AUTOSCAN_PACKAGE_NAME | integral.resteasy.autoscan-package-name | rest    | Package name for AUTOSCAN. Omit a dot-prefix.                                                                   |
 | CORS_ENABLED          | integral.resteasy.cors-enabled          | false   | Add CORS-header to responses if Origin is available in request                                                  |
+| VERSIONING_ENABLED    | integral.resteasy.versioning-enabled    | false   | Adds version infos to the header via @Version annotation.
+
+### Versioning
+
+You can easily add an version headers to the response headers by enabling the Symbol
+`ResteasySymbols.VERSIONING_ENABLED`. After that you need to annotate your resource
+classes and/or methods with `@Version("<current version")` /
+`@Version(value = "<current version>", deprecated = "<deprecated since>")` and the
+following headers will be added to the response:
+- Api-Version: <current version>
+- Api-Deprecated: <deprecated since>
+
+The deprecation header will be omitted if no version is present.
+
+If versioning is enabled a warning will be logged if the `@Version` is missing.
 
 
 ## Gradle task uploadArchives
