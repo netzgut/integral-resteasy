@@ -105,7 +105,7 @@ public class ResteasyModule {
                             }
                             catch (RuntimeException e) {
                                 logger.info(e.getMessage());
-                                logger.info("Trying to create a proxy for " + rootResourceClass.getName());
+                                logger.info("Trying to create a proxy for {}", rootResourceClass.getName());
                                 singletons.add(locator.proxy(rootResourceClass, clazz));
                             }
                         }
