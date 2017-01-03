@@ -45,6 +45,7 @@ import net.netzgut.integral.internal.resteasy.ResteasyApplication;
 import net.netzgut.integral.internal.resteasy.ResteasyCustomHeaderServiceImplementation;
 import net.netzgut.integral.internal.resteasy.ResteasyRequestFilter;
 import net.netzgut.integral.internal.resteasy.header.CorsHeaderProvider;
+import net.netzgut.integral.internal.resteasy.provider.VersionProvider;
 import net.netzgut.integral.resteasy.ResteasyPackageManager;
 import net.netzgut.integral.resteasy.ResteasySymbols;
 import net.netzgut.integral.resteasy.header.ResteasyCustomerHeaderService;
@@ -70,6 +71,7 @@ public class ResteasyModule {
         conf.add(ResteasySymbols.AUTOSCAN, Boolean.TRUE.toString());
         conf.add(ResteasySymbols.AUTOSCAN_PACKAGE_NAME, ResteasyModule.DEFAULT_AUTOSCAN_PACKAGE_NAME);
         conf.add(ResteasySymbols.CORS_ENABLED, Boolean.FALSE.toString());
+        conf.add(ResteasySymbols.VERSIONING_ENABLED, Boolean.FALSE.toString());
     }
 
     @Contribute(HttpServletRequestHandler.class)
@@ -144,6 +146,14 @@ public class ResteasyModule {
                                                    @Symbol(ResteasySymbols.CORS_ENABLED) boolean corsEnabled) {
         if (corsEnabled) {
             configuration.addInstance(CorsHeaderProvider.class);
+        }
+    }
+
+    @Contribute(Application.class)
+    public static void configureRestProviders(Configuration<Object> singletons,
+                                              @Symbol(ResteasySymbols.VERSIONING_ENABLED) boolean versioningEnabled) {
+        if (versioningEnabled) {
+            singletons.addInstance(VersionProvider.class);
         }
     }
 }

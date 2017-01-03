@@ -42,7 +42,12 @@ public class ResteasySymbols {
     public static final String AUTOSCAN_PACKAGE_NAME = "integral.resteasy.autoscan-package-name";
 
     /**
-     * add the CORS authorization to the header
+     * Add the CORS authorization to the header.
      */
     public static final String CORS_ENABLED          = "integral.resteasy.cors-enabled";
+
+    /**
+     * Adds version infos to the headers according to the annotation {@link net.netzgut.integral.reasteasy.annotations.Version}.
+     */
+    public static final String VERSIONING_ENABLED    = "integral.resteasy.versioning-enabled";
 }
