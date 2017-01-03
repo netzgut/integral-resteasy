@@ -21,6 +21,7 @@ package net.netzgut.integral.resteasy.modules;
 
 import java.util.Collection;
 
+import javax.ws.rs.core.Application;
 import javax.ws.rs.ext.Provider;
 
 import org.apache.tapestry5.internal.InternalConstants;
@@ -56,7 +57,7 @@ public class ResteasyModule {
     public static final String DEFAULT_AUTOSCAN_PACKAGE_NAME = "rest";
 
     public static void bind(ServiceBinder binder) {
-        binder.bind(javax.ws.rs.core.Application.class, ResteasyApplication.class);
+        binder.bind(Application.class, ResteasyApplication.class);
         binder.bind(HttpServletRequestFilter.class, ResteasyRequestFilter.class)
               .withId(ResteasyModule.REQUEST_FILTER_ID);
         binder.bind(ResteasyCustomerHeaderService.class, ResteasyCustomHeaderServiceImplementation.class);
