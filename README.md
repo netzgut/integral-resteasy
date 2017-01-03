@@ -41,8 +41,8 @@ You can easily add an version headers to the response headers by enabling the Sy
 classes and/or methods with `@Version("<current version")` /
 `@Version(value = "<current version>", deprecated = "<deprecated since>")` and the
 following headers will be added to the response:
-- Api-Version: <current version>
-- Api-Deprecated: <deprecated since>
+- `Api-Version: <current version>`
+- `Api-Deprecated: <deprecated since>`
 
 The deprecation header will be omitted if no version is present.
 
