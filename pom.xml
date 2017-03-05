@@ -5,7 +5,7 @@
   <artifactId>integral-resteasy</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>integral-resteasy</name>
-  <description>A ReastEasy 3.0.19 replacement for org.tynamo.tapestry-resteasy</description>
+  <description>A ReastEasy 3.1.0 replacement for org.tynamo.tapestry-resteasy</description>
   <url>https://github.com/netzgut/integral-resteasy</url>
   <inceptionYear>2016</inceptionYear>
   <licenses>
@@ -27,19 +27,13 @@
     <dependency>
       <groupId>org.slf4j</groupId>
       <artifactId>slf4j-log4j12</artifactId>
-      <version>1.7.21</version>
-      <scope>compile</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.tapestry</groupId>
-      <artifactId>tapestry-core</artifactId>
-      <version>5.4.1</version>
+      <version>1.7.24</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxrs</artifactId>
-      <version>3.1.0.Final</version>
+      <version>3.1.1.Final</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
@@ -51,13 +45,19 @@
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxb-provider</artifactId>
-      <version>3.1.0.Final</version>
+      <version>3.1.1.Final</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
+      <groupId>org.apache.tapestry</groupId>
+      <artifactId>tapestry-core</artifactId>
+      <version>5.4.1</version>
+      <scope>provided</scope>
+    </dependency>
+    <dependency>
       <groupId>javax.servlet</groupId>
-      <artifactId>servlet-api</artifactId>
-      <version>2.5</version>
+      <artifactId>javax.servlet-api</artifactId>
+      <version>3.1.0</version>
       <scope>provided</scope>
     </dependency>
   </dependencies>

@@ -30,8 +30,8 @@ repositories {
 
 project.ext.versions = [
     // compile
-    slf4j: '1.7.21',
-    resteasy: '3.1.0.Final',
+    slf4j: '1.7.24',
+    resteasy: '3.1.1.Final',
 
     // provided
     tapestry: '5.4.1',
