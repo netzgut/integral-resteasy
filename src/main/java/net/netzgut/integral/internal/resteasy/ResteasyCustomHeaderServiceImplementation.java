@@ -40,6 +40,7 @@ public class ResteasyCustomHeaderServiceImplementation implements ResteasyCustom
             if (InternalUtils.isBlank(name)) {
                 continue;
             }
+
             String value = provider.getValue(request, response);
             if (InternalUtils.isBlank(value)) {
                 continue;

@@ -27,9 +27,11 @@ import net.netzgut.integral.resteasy.header.ResteasyHeaderProvider;
  */
 public class CorsHeaderProvider implements ResteasyHeaderProvider {
 
+    private static final String HEADER_ORIGIN = "Origin";
+
     @Override
     public String getName(HttpServletRequest request, HttpServletResponse response) {
-        String origin = request.getHeader("Origin");
+        String origin = request.getHeader(HEADER_ORIGIN);
         if (InternalUtils.isBlank(origin)) {
             return null;
         }
@@ -38,7 +40,7 @@ public class CorsHeaderProvider implements ResteasyHeaderProvider {
 
     @Override
     public String getValue(HttpServletRequest request, HttpServletResponse response) {
-        return request.getHeader("Origin");
+        return request.getHeader(HEADER_ORIGIN);
     }
 
 }

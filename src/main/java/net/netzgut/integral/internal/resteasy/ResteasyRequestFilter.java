@@ -112,18 +112,18 @@ public class ResteasyRequestFilter implements HttpServletRequestFilter, HttpRequ
 
         String path = getPath(request);
 
-        if (this.filterPattern.matcher(path).matches()) {
-            if (!this.productionMode) {
-                this.checkForUpdatesFilter.service(null, null, this.dummyHandler);
-            }
-
-            this.servletContainerDispatcher.service(request.getMethod(), request, response, true);
-            this.headerProviderManager.provide(request, response);
-
-            return true;
+        if (this.filterPattern.matcher(path).matches() == false) {
+            return handler.service(request, response);
         }
 
-        return handler.service(request, response);
+        if (!this.productionMode) {
+            this.checkForUpdatesFilter.service(null, null, this.dummyHandler);
+        }
+
+        this.servletContainerDispatcher.service(request.getMethod(), request, response, true);
+        this.headerProviderManager.provide(request, response);
+
+        return true;
     }
 
     private String getPath(HttpServletRequest request) {

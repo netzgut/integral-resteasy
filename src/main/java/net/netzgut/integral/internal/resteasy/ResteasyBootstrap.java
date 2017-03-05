@@ -41,7 +41,7 @@ public class ResteasyBootstrap extends ListenerBootstrap {
             val = this.source.valueForSymbol(name);
         }
         catch (RuntimeException e) {
-            //ignore symbol not found
+            // Ignore symbol not found
         }
 
         if (val == null) {
