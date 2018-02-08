@@ -53,6 +53,7 @@ import org.jboss.resteasy.plugins.server.servlet.ServletContainerDispatcher;
 import org.jboss.resteasy.specimpl.ResteasyHttpHeaders;
 import org.jboss.resteasy.spi.HttpRequest;
 import org.jboss.resteasy.spi.HttpResponse;
+import org.jboss.resteasy.spi.ReaderException;
 import org.jboss.resteasy.spi.ResteasyProviderFactory;
 import org.jboss.resteasy.spi.ResteasyUriInfo;
 import org.jboss.resteasy.util.GetRestful;
@@ -120,8 +121,15 @@ public class ResteasyRequestFilter implements HttpServletRequestFilter, HttpRequ
             this.checkForUpdatesFilter.service(null, null, this.dummyHandler);
         }
 
-        this.servletContainerDispatcher.service(request.getMethod(), request, response, true);
-        this.headerProviderManager.provide(request, response);
+        try {
+            this.servletContainerDispatcher.service(request.getMethod(), request, response, true);
+            this.headerProviderManager.provide(request, response);
+        }
+        // this exception is thrown when request contains illegal characters
+        catch (ReaderException ex) {
+            log.warn("Problem occured reading REST request: " + ex.getMessage(), ex);
+            return false;
+        }
 
         return true;
     }
