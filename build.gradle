@@ -13,7 +13,7 @@ plugins {
 
 group 'net.netzgut.integral'
 version '0.0.1-SNAPSHOT'
-description 'A ReastEasy 3.1.0 replacement for org.tynamo.tapestry-resteasy'
+description 'A ReastEasy 3.1.1 replacement for org.tynamo.tapestry-resteasy'
 
 project.ext.inceptionYear = '2016'
 project.ext.github = 'integral-resteasy'
@@ -34,7 +34,7 @@ project.ext.versions = [
     resteasy: '3.1.1.Final',
 
     // provided
-    tapestry: '5.4.1',
+    tapestry: '5.4.3',
     servlet: '3.1.0'
 ]
 
