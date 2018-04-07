@@ -108,7 +108,7 @@ task pom {
             def plugins = xmlProvider.asNode().appendNode('build').appendNode('plugins')
             def mavenCompilerPlugin = plugins.appendNode('plugin')
             mavenCompilerPlugin.appendNode('artifactId').value = 'maven-compiler-plugin'
-            mavenCompilerPlugin.appendNode('version').value = '3.1'
+            mavenCompilerPlugin.appendNode('version').value = '3.5.1'
             def mavenCompilerPluginConfiguration = mavenCompilerPlugin.appendNode('configuration')
             mavenCompilerPluginConfiguration.appendNode('source').value = sourceCompatibility
             mavenCompilerPluginConfiguration.appendNode('target').value = targetCompatibility
