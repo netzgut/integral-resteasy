@@ -7,7 +7,6 @@ buildscript {
 plugins {
     id 'java'
     id 'maven'
-    id 'nebula.provided-base' version '3.1.0'
     id 'com.github.hierynomus.license' version '0.13.1'
 }
 
@@ -48,8 +47,8 @@ dependencies {
     }
     compile "org.jboss.resteasy:resteasy-jaxb-provider:${versions.resteasy}"
 
-    provided "org.apache.tapestry:tapestry-core:${versions.tapestry}"
-    provided "javax.servlet:javax.servlet-api:${versions.servlet}"
+    compileOnly "org.apache.tapestry:tapestry-core:${versions.tapestry}"
+    compileOnly "javax.servlet:javax.servlet-api:${versions.servlet}"
 }
 
 jar {
@@ -82,6 +81,30 @@ task pom {
                 }
             }
         }.withXml { xmlProvider ->
+            // We need to add the compileOnly dependencies manually, maven-plugin isn't supporting it.
+            project.configurations.compileOnly.allDependencies.each { dep ->
+                asNode().dependencies[0].appendNode('dependency').with {
+                    it.appendNode('groupId', dep.group)
+                    it.appendNode('artifactId', dep.name)
+                    it.appendNode('version', dep.version)
+                    it.appendNode('scope', 'provided')
+                }
+            }
+            
+            // Sort the dependencies so the order wont change with every ionvocation
+            def dependenciesNodeList = node.get('dependencies')
+            if (dependenciesNodeList) {
+                def dependenciesNode = dependenciesNodeList.get(0)
+                def dependencyNodeList = dependenciesNode.get('dependency')
+                def sorted = dependencyNodeList.sort { a, b ->
+                    def r = a.get('groupId').text().trim().compareTo(b.get('groupId').text().trim())
+                    if (r != 0) return r
+                    return a.get('artifactId').text().trim().compareTo(b.get('artifactId').text().trim())
+                }
+                dependenciesNode.children().removeAll(dependenciesNode.children())
+                sorted.each { dependenciesNode.append(it) }
+            }
+            
             def plugins = xmlProvider.asNode().appendNode('build').appendNode('plugins')
             def mavenCompilerPlugin = plugins.appendNode('plugin')
             mavenCompilerPlugin.appendNode('artifactId').value = 'maven-compiler-plugin'
