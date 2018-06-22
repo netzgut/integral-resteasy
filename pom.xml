@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>net.netzgut.integral</groupId>
   <artifactId>integral-resteasy</artifactId>
-  <version>0.0.1</version>
+  <version>0.0.2-SNAPSHOT</version>
   <name>integral-resteasy</name>
   <description>A ReastEasy 3.1.1 replacement for org.tynamo.tapestry-resteasy</description>
   <url>https://github.com/netzgut/integral-resteasy</url>
