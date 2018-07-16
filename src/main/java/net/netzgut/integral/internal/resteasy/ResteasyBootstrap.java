@@ -15,6 +15,8 @@
  */
 package net.netzgut.integral.internal.resteasy;
 
+import java.util.Optional;
+
 // Original project:    Tapestry-Resteasy https://github.com/tynamo/tapestry-resteasy
 // Original module:     tapestry-resteasy
 // Original file:       org.tynamo.resteasy.TapestryResteasyBootstrap
@@ -44,10 +46,7 @@ public class ResteasyBootstrap extends ListenerBootstrap {
             // Ignore symbol not found
         }
 
-        if (val == null) {
-            val = super.getParameter(name);
-        }
-        return val;
+        return Optional.ofNullable(val).orElse(super.getParameter(name));
     }
 
 }

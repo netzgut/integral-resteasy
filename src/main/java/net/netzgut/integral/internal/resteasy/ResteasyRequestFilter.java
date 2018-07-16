@@ -177,9 +177,6 @@ public class ResteasyRequestFilter implements HttpServletRequestFilter, HttpRequ
         List<Class<?>> actualResourceClasses = new ArrayList<>();
         List<Class<?>> actualProviderClasses = new ArrayList<>();
 
-        List<Object> resources = new ArrayList<>();
-        List<Object> providers = new ArrayList<>();
-
         if (config.getClasses() != null) {
             for (Class<?> clazz : config.getClasses()) {
                 if (GetRestful.isRootResource(clazz)) {
@@ -194,6 +191,12 @@ public class ResteasyRequestFilter implements HttpServletRequestFilter, HttpRequ
                 }
             }
         }
+
+        actualProviderClasses.forEach(this.providerFactory::registerProvider);
+        actualResourceClasses.forEach(this.dispatcher.getRegistry()::addPerRequestResource);
+
+        List<Object> resources = new ArrayList<>();
+        List<Object> providers = new ArrayList<>();
 
         if (config.getSingletons() != null) {
             for (Object obj : config.getSingletons()) {
@@ -213,10 +216,7 @@ public class ResteasyRequestFilter implements HttpServletRequestFilter, HttpRequ
             }
         }
 
-        actualProviderClasses.forEach(this.providerFactory::registerProvider);
         providers.forEach(this.providerFactory::registerProviderInstance);
-
-        actualResourceClasses.forEach(this.dispatcher.getRegistry()::addPerRequestResource);
         resources.forEach(this.dispatcher.getRegistry()::addSingletonResource);
     }
 }
