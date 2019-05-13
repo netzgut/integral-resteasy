@@ -11,7 +11,7 @@ plugins {
 }
 
 group 'net.netzgut.integral'
-version '0.0.2-SNAPSHOT'
+version '0.0.2'
 description 'A ReastEasy 3.6.3 replacement for org.tynamo.tapestry-resteasy'
 
 project.ext.inceptionYear = '2016'
