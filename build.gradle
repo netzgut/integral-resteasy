@@ -141,10 +141,17 @@ uploadArchives {
     ext.snapshot_repository_username = project.hasProperty('snapshot-repository-username') ? project.property('snapshot-repository-username') : ''
     ext.snapshot_repository_password = project.hasProperty('snapshot-repository-password') ? project.property('snapshot-repository-password') : ''
 
+    ext.release_repository = project.hasProperty('release-repository') ? project.property('release-repository') : ''
+    ext.release_repository_username = project.hasProperty('release-repository-username') ? project.property('release-repository-username') : ''
+    ext.release_repository_password = project.hasProperty('release-repository-password') ? project.property('release-repository-password') : ''
+
     repositories {
         mavenDeployer {
             snapshotRepository(url: snapshot_repository) {
                 authentication(userName: snapshot_repository_username, password: snapshot_repository_password)
+            }
+            repository(url: release_repository) {
+                authentication(userName: release_repository_username, password: release_repository_password)
             }
         }
     }
