@@ -12,7 +12,7 @@ plugins {
 
 group 'net.netzgut.integral'
 version '0.0.2-SNAPSHOT'
-description 'A ReastEasy 3.1.1 replacement for org.tynamo.tapestry-resteasy'
+description 'A ReastEasy 3.6.3 replacement for org.tynamo.tapestry-resteasy'
 
 project.ext.inceptionYear = '2016'
 project.ext.github = 'integral-resteasy'
@@ -30,7 +30,7 @@ repositories {
 project.ext.versions = [
     // compile
     slf4j: '1.7.24',
-    resteasy: '3.1.1.Final',
+    resteasy: '3.6.3.Final',
 
     // provided
     tapestry: '5.4.3',

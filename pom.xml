@@ -5,7 +5,7 @@
   <artifactId>integral-resteasy</artifactId>
   <version>0.0.2-SNAPSHOT</version>
   <name>integral-resteasy</name>
-  <description>A ReastEasy 3.1.1 replacement for org.tynamo.tapestry-resteasy</description>
+  <description>A ReastEasy 3.6.3 replacement for org.tynamo.tapestry-resteasy</description>
   <url>https://github.com/netzgut/integral-resteasy</url>
   <inceptionYear>2016</inceptionYear>
   <licenses>
@@ -39,13 +39,13 @@
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxb-provider</artifactId>
-      <version>3.1.1.Final</version>
+      <version>3.6.3.Final</version>
       <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-jaxrs</artifactId>
-      <version>3.1.1.Final</version>
+      <version>3.6.3.Final</version>
       <scope>compile</scope>
       <exclusions>
         <exclusion>
